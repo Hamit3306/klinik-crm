@@ -1,0 +1,16 @@
+node_modules
+.env
+data/*.db
+data/*.db-journal
+data/*.db-shm
+data/*.db-wal
+data/backups/
+whatsapp-session
+.wwebjs_cache
+.wwebjs_auth
+npm-debug.log
+.DS_Store
+*.sqlite
+crm.db
+cloudflared.exe
+public/uploads/wa_*

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prof. Dr. Esin Yalçınkaya</title>
+  <meta name="description" content="Instagram Lead Ads, Instagram DM entegrasyonlu klinik takip sistemi">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=3.0.17">
+</head>
+<body>
+  <div id="login-screen" class="login-screen">
+    <div class="login-bg-orb login-bg-orb-1"></div>
+    <div class="login-bg-orb login-bg-orb-2"></div>
+    <div class="login-bg-orb login-bg-orb-3"></div>
+    <div class="login-container">
+      <div class="login-card">
+        <div class="login-logo">
+          <img src="assets/logo.png" alt="Logo" class="login-logo-img">
+          <h1 class="elegant-title">Prof. Dr. Esin Yalçınkaya</h1>
+          <p>Meta Entegrasyonlu Klinik CRM</p>
+        </div>
+        <form id="login-form" autocomplete="off">
+          <div class="form-group">
+            <label for="login-username">Kullanıcı Adı</label>
+            <div class="input-wrapper"><i class="ri-user-line"></i><input id="login-username" type="text" required autocomplete="username" placeholder="Kullanıcı adınızı girin"></div>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Şifre</label>
+            <div class="input-wrapper"><i class="ri-lock-line"></i><input id="login-password" type="password" required autocomplete="current-password" placeholder="Şifrenizi girin"><button type="button" id="toggle-password" class="toggle-password" aria-label="Şifreyi göster"><i class="ri-eye-line"></i></button></div>
+          </div>
+          <div id="login-error" class="form-error"></div>
+          <button type="submit" class="btn btn-primary btn-block" id="login-btn"><span>Giriş Yap</span><i class="ri-arrow-right-line"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="app" class="app-container hidden">
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo" style="display: flex; justify-content: center; width: 100%;">
+          <img src="assets/logo.png" alt="Logo" class="sidebar-logo-img" style="height: 85px; width: auto; max-width: 100%; object-fit: contain;">
+        </div>
+        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Menüyü daralt"><i class="ri-menu-fold-line"></i></button>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-page="dashboard"><i class="ri-dashboard-3-line"></i><span>Dashboard</span></a>
+        <a href="#" class="nav-item" data-page="leads"><i class="ri-user-received-2-line"></i><span>Kişiler / Adaylar</span><b id="lead-nav-count" class="nav-count hidden">0</b></a>
+        <a href="#" class="nav-item" data-page="patients"><i class="ri-parent-line"></i><span>Hastalar</span></a>
+        <a href="#" class="nav-item" data-page="inbox"><i class="ri-chat-3-line"></i><span>Mesaj Gelen Kutusu</span><b id="inbox-nav-count" class="nav-count hidden">0</b></a>
+        <a href="#" class="nav-item" data-page="appointments"><i class="ri-calendar-check-line"></i><span>Randevular</span></a>
+        <a href="#" class="nav-item" data-page="finance" data-role="admin"><i class="ri-wallet-3-line"></i><span>Kasa & Finans</span></a>
+        <a href="#" class="nav-item" data-page="campaigns" data-role="admin"><i class="ri-megaphone-line"></i><span>Kampanyalar</span></a>
+        <a href="#" class="nav-item" data-page="integrations" data-role="admin"><i class="ri-links-line"></i><span>Meta Entegrasyonu</span></a>
+        <a href="#" class="nav-item" data-page="users" data-role="admin"><i class="ri-team-line"></i><span>Kullanıcı Yönetimi</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info"><div class="user-avatar"><i class="ri-user-3-line"></i></div><div class="user-details"><span id="sidebar-username" class="user-name">Yönetici</span><span id="sidebar-role" class="user-role">Yönetici</span></div></div>
+        <button id="logout-btn" class="btn-logout" aria-label="Çıkış"><i class="ri-logout-box-r-line"></i></button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="top-bar">
+        <div class="top-bar-left"><button id="mobile-menu-btn" class="mobile-menu-btn"><i class="ri-menu-line"></i></button><h1 id="page-title" class="page-title">Dashboard</h1></div>
+        <div class="top-bar-right">
+          <button id="refresh-btn" class="top-action" title="Yenile"><i class="ri-refresh-line"></i></button>
+          <div class="top-bar-date"><i class="ri-calendar-line"></i><span id="current-date"></span></div>
+        </div>
+      </header>
+      <section id="page-content" class="page-content"><div class="page-loader"><i class="ri-loader-4-line"></i><span>Veriler yükleniyor...</span></div></section>
+    </main>
+  </div>
+
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal-container">
+      <div class="modal-header"><h3 id="modal-title"></h3><button id="modal-close" class="modal-close"><i class="ri-close-line"></i></button></div>
+      <div id="modal-body" class="modal-body"></div>
+    </div>
+  </div>
+  <div id="notification-container" class="notification-container"></div>
+
+  <script src="js/app.js?v=3.0.23" defer></script>
+  <script src="js/dashboard.js?v=3.0.23" defer></script>
+  <script src="js/leads.js?v=3.0.23" defer></script>
+  <script src="js/inbox.js?v=3.0.23" defer></script>
+  <script src="js/appointments.js?v=3.0.23" defer></script>
+  <script src="js/patients.js?v=3.0.23" defer></script>
+  <script src="js/finance.js?v=3.0.23" defer></script>
+  <script src="js/campaigns.js?v=3.0.23" defer></script>
+  <script src="js/integrations.js?v=3.0.23" defer></script>
+  <script src="js/users.js?v=3.0.23" defer></script>
+</body>
+</html>
