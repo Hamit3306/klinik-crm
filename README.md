@@ -1,53 +1,53 @@
 # Klinik Meta CRM v3.0
 
-`@your_instagram_account` hesabı için Instagram Lead Ads, Instagram DM ve WhatsApp Cloud API mesajlarını **hiçbir manuel kişi girişi gerektirmeden** tek CRM havuzuna aktaran klinik takip sistemi.
+Clinic tracking system for the `@your_instagram_account` account that routes Instagram Lead Ads, Instagram DM, and WhatsApp Cloud API messages into a single CRM pool **without requiring any manual data entry**.
 
-## Otomatik çalışma biçimi
+## Automatic Workflow
 
-- Instagram reklam formu doldurulur → ad, telefon, e-posta, form cevapları ve reklam bilgisi otomatik kaydedilir.
-- Instagram DM gelir → Instagram kullanıcı kimliği, kullanıcı adı/ad bilgisi ve mesaj otomatik kaydedilir.
-- Instagram mesajında telefon veya e-posta yazılmışsa otomatik algılanır.
-- WhatsApp mesajı gelir → profil adı, telefon numarası ve mesaj otomatik kaydedilir.
-- Aynı telefon/e-posta/Meta kimliği daha önce varsa ikinci kişi açılmaz; kayıtlar otomatik birleştirilir.
-- Tüm mesajlar **Mesaj Gelen Kutusu** ekranında kanalına göre görünür.
+- Instagram ad form is filled → name, phone, email, form answers, and ad info are automatically saved.
+- Instagram DM is received → Instagram user ID, username/name info, and the message are automatically saved.
+- If a phone or email is written in the Instagram message, it is automatically detected.
+- WhatsApp message is received → profile name, phone number, and message are automatically saved.
+- If the same phone/email/Meta ID already exists, a second record is not created; the records are merged automatically.
+- All messages appear in the **Message Inbox** screen sorted by their respective channels.
 
-Klinik personelinin kişi kartı oluşturmasına gerek yoktur. Manuel kayıt ekranı yalnızca yedek kullanım içindir.
+Clinic staff does not need to manually create patient cards. The manual registration screen is only for backup use.
 
-## Önemli platform sınırı
+## Important Platform Limit
 
-WhatsApp webhook'u kullanıcının telefon numarasını otomatik gönderir. Instagram DM webhook'u ise telefon numarası göndermez; Instagram yalnızca mesaj gönderen hesaba ait Instagram kapsamlı kullanıcı kimliği ve izin verilen profil bilgilerini verir. Kullanıcı telefonunu DM içinde yazarsa sistem metinden otomatik çıkarır. Kişi daha önce Meta formunu aynı telefon/e-posta ile doldurduysa kayıt otomatik birleştirilir.
+WhatsApp webhook automatically sends the user's phone number. The Instagram DM webhook does not send the phone number; Instagram only provides the Instagram-scoped user ID and permitted profile info belonging to the messaging account. If the user writes their phone inside the DM, the system automatically extracts it from the text. If the person has previously filled out the Meta form with the same phone/email, the record is automatically merged.
 
-## Özellikler
+## Features
 
-- Instagram Lead Ads `leadgen` webhook entegrasyonu
-- Instagram Messaging API gelen/giden DM entegrasyonu
-- Instagram kullanıcı profil bilgisini otomatik alma
-- DM metninden telefon ve e-posta otomatik algılama
-- WhatsApp Cloud API gelen/giden mesaj entegrasyonu
-- Telefon, e-posta, WhatsApp ID, Instagram Scoped ID ve Meta Lead ID ile otomatik eşleştirme
-- Mükerrer kişi kayıtlarını otomatik birleştirme
-- Instagram ve WhatsApp ortak mesaj gelen kutusu
-- Lead, kampanya ve randevu ilişkileri
-- SQLite merkezi veritabanı
-- Meta webhook imza doğrulaması ve mükerrer olay engelleme
-- Güvenli sunucu taraflı giriş ve oturum yönetimi
-- Yerel test için üç ayrı simülasyon
+- Instagram Lead Ads `leadgen` webhook integration
+- Instagram Messaging API incoming/outgoing DM integration
+- Auto-fetching Instagram user profile information
+- Automatic extraction of phone and email from DM text
+- WhatsApp Cloud API incoming/outgoing message integration
+- Automatic matching with phone, email, WhatsApp ID, Instagram Scoped ID, and Meta Lead ID
+- Auto-merging of duplicate contact records
+- Unified message inbox for Instagram and WhatsApp
+- Lead, campaign, and appointment relations
+- SQLite centralized database
+- Meta webhook signature verification and duplicate event prevention
+- Secure server-side login and session management
+- Three distinct simulations for local testing
 
-## Gereksinimler
+## Requirements
 
-- Node.js 22 veya üzeri
-- Canlı entegrasyon için internete açık HTTPS alan adı
+- Node.js 22 or higher
+- Publicly accessible HTTPS domain for live integration
 - Meta Business Portfolio
-- Profesyonel Instagram Business/Creator hesabı
-- İlgili Facebook Sayfası ve reklam hesabı
-- WhatsApp Business Platform / Cloud API hesabı
-- Gerekli Meta izinleri ve webhook abonelikleri
+- Professional Instagram Business/Creator account
+- Linked Facebook Page and ad account
+- WhatsApp Business Platform / Cloud API account
+- Necessary Meta permissions and webhook subscriptions
 
-## Hızlı başlangıç
+## Quick Start
 
-Windows'ta ZIP'i çıkarıp `BASLAT.bat` dosyasını çalıştırın.
+Extract the ZIP on Windows and run the `BASLAT.bat` file.
 
-Terminal ile:
+Via terminal:
 
 ```bash
 npm install
@@ -55,44 +55,44 @@ cp .env.example .env
 npm start
 ```
 
-Tarayıcı:
+Browser:
 
 ```text
 http://localhost:3001
 ```
 
-İlk giriş:
+Initial login:
 
 ```text
-Kullanıcı adı: admin
-Şifre: klinik2026
+Username: admin
+Password: klinik2026
 ```
 
-Üretime geçmeden önce `ADMIN_PASSWORD` değerini değiştirin.
+Change the `ADMIN_PASSWORD` value before moving to production.
 
-## Canlı Meta bağlantısı
+## Live Meta Connection
 
-Ayrıntılı kurulum: [META_KURULUM.md](META_KURULUM.md)
+Detailed setup: [META_KURULUM.md](META_KURULUM.md)
 
-Ortak webhook adresi:
+Unified webhook address:
 
 ```text
-https://crm.alanadiniz.com/webhooks/meta
+https://crm.yourdomain.com/webhooks/meta
 ```
 
-Ayrı alias adresleri:
+Separate alias addresses:
 
 ```text
-https://crm.alanadiniz.com/webhooks/leadgen
-https://crm.alanadiniz.com/webhooks/instagram
-https://crm.alanadiniz.com/webhooks/whatsapp
+https://crm.yourdomain.com/webhooks/leadgen
+https://crm.yourdomain.com/webhooks/instagram
+https://crm.yourdomain.com/webhooks/whatsapp
 ```
 
-## Gerekli `.env` değerleri
+## Required `.env` Values
 
 ```env
-APP_URL=https://crm.alanadiniz.com
-CORS_ORIGIN=https://crm.alanadiniz.com
+APP_URL=https://crm.yourdomain.com
+CORS_ORIGIN=https://crm.yourdomain.com
 
 META_VERIFY_TOKEN=
 META_APP_SECRET=
@@ -111,32 +111,32 @@ WHATSAPP_BUSINESS_ACCOUNT_ID=
 INSTAGRAM_USERNAME=your_instagram_account
 ```
 
-Gizli değerleri frontend dosyalarına veya GitHub'a yazmayın.
+Do not write secret values in frontend files or push them to GitHub.
 
-## Otomatik test akışı
+## Automated Test Flow
 
-1. Uygulamaya giriş yapın.
-2. **Meta Entegrasyonu** sayfasına girin.
-3. Sırasıyla Form Lead'i, Instagram DM ve WhatsApp Mesajı testlerini çalıştırın.
-4. Üç test de aynı telefonla çalıştığı için tek kişi kartında birleşir.
-5. **Mesaj Gelen Kutusu** ekranında hem Instagram hem WhatsApp konuşmaları görünür.
+1. Log into the application.
+2. Go to the **Meta Integration** page.
+3. Run the Form Lead, Instagram DM, and WhatsApp Message tests respectively.
+4. Since all three tests run with the same phone number, they merge into a single contact card.
+5. In the **Message Inbox** screen, both Instagram and WhatsApp conversations will be visible.
 
-## Veritabanı
+## Database
 
 ```text
 data/klinik.db
 ```
 
-Üretimde şifreli, otomatik ve farklı sunucuya alınan yedek kullanılmalıdır.
+In production, an encrypted, automated backup transferred to a different server should be used.
 
-## Proje yapısı
+## Project Structure
 
 ```text
-public/              Yönetim paneli
-src/config.js        Ortam ayarları
-src/db.js            SQLite şeması ve otomatik migrasyonlar
-src/auth.js          Oturum yönetimi
-src/meta.js          Lead Ads + Instagram DM + WhatsApp entegrasyonu
-server.js            API ve webhook sunucusu
-data/                 Veritabanı klasörü
+public/              Admin panel
+src/config.js        Environment settings
+src/db.js            SQLite schema and auto migrations
+src/auth.js          Session management
+src/meta.js          Lead Ads + Instagram DM + WhatsApp integration
+server.js            API and webhook server
+data/                Database folder
 ```
